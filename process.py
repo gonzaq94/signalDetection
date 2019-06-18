@@ -34,7 +34,7 @@ def get_px(max_x,max_y):
 #caracterisiques = dict(zip(classes, zip(burst_durations_px,bandwidths_px))) #dictionnaire contenant commes cles les classes, et les valeurs sont des tuples (burst, band)
 
 def get_burst_start(classe, filename, max_y, y1): #les debuts des bursts sont dans des fichiers .txt dans le dossier 5000ms
-    file = os.path.join(path_5000, classe, filename)
+    file = filename
     try:
         burst_starts=open(file, 'r').read().splitlines()
         
