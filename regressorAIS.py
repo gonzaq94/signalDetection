@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw, ImageTk, ImageChops
+from PIL import Image, ImageDraw, ImageChops #, ImageTk,
 import numpy as np
 from keras.models import Sequential, load_model
 from keras.layers import Dense, Activation, Conv2D, MaxPooling2D, BatchNormalization, Flatten, Dropout
@@ -29,7 +29,7 @@ def drawrect(drawcontext, xy, outline=None, width=0):
 #We charge the model
 
 trainedModel=load_model('model.h5')
-#trainedModel.summary()
+trainedModel.summary()
 
 #We charge and preprocess the image
 img = Image.open(image).resize((709, 532))
@@ -79,6 +79,8 @@ classes = np.load('classes.npy')
 groundtruth = 'AIS'
 print('max_x : {}'.format(max_x))
 bandwidths_px, burst_durations_px = get_px(max_x, max_y)
+print("bandwidhts px: ", bandwidths_px)
+print("burst durations px: ", burst_durations_px)
 burst_starts = get_burst_start(groundtruth, filename_txt, max_y, box[1])  # debuts des bursts pour l'image en question
 burst_len = burst_durations_px[np.where(classes == groundtruth)[0][0]]
 f0_px = box[0] + np.ceil(max_x / 2)
@@ -101,7 +103,7 @@ for x in range(rows):
 #we draw the coordinates of the groundtruth of the bounding boxes
 for k in range(len(burst_starts)):
     draw = ImageDraw.Draw(img)
-    draw.rectangle([(f0_px - bw / 2, burst_starts[k]), (f0_px + bw / 2, burst_starts[k] + burst_len)], outline="blue",width=2)
+    draw.rectangle([(f0_px - bw / 2, burst_starts[k]), (f0_px + bw / 2, burst_starts[k] + burst_len)], outline="blue")
 
 
 #We show and save the image
